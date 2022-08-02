@@ -1,0 +1,44 @@
+<h1>Courses</h1>
+
+<div class="section-bg p-4">
+    <button (click)="exportCoursesData()" class="btn btn-primary">
+        <i class="bi-download pe-2"></i>
+        Export
+    </button>
+    <table class="table">
+       <thead>
+           <tr>
+               <th>
+                   Course Name
+                   <button (click)="sortCourses('name')" class="btn btn-default">
+                       <i [ngClass]="displaySort('name')"></i>
+                   </button>
+               </th>
+               <th>
+                   Price
+                   <button (click)="sortCourses('price')" class="btn btn-default">
+                       <i [ngClass]="displaySort('price')"></i>
+                   </button>
+               </th>
+           </tr>
+       </thead>
+       <tbody *ngFor="let course of courses">
+           <tr>
+               <td>({{course.course_code}}) {{course.course_name}}</td>
+               <td>{{course.course_price}}$</td>
+               <button type="button" (click)="isCollapsed = !isCollapsed"
+                    [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"><i class="bi bi-plus"></i>
+               </button>
+           </tr>
+           <tr>
+            <td id="collapseBasic" [collapse]="isCollapsed">
+                Start Date: ({{course.course_starting_date | date:'yyyy/MM/dd'}})
+                # of classes: {{course.num_of_lessons}} <br>
+                Category: {{course.course_category}} <br>
+                Course Description: {{course.course_description}} <br>
+                Lecturer: {{course.course_lecturer}}
+            </td>
+           </tr>
+       </tbody>
+    </table>
+  </div>
